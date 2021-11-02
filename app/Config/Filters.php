@@ -19,6 +19,7 @@ class Filters extends BaseConfig
         'csrf'     => CSRF::class,
         'toolbar'  => DebugToolbar::class,
         'honeypot' => Honeypot::class,
+        'oauthFilter' => \App\Filters\OauthFilter::class
     ];
 
     /**
@@ -58,5 +59,7 @@ class Filters extends BaseConfig
      *
      * @var array
      */
-    public $filters = [];
+    public $filters = [
+        'oauthFilter' => ['before' => ['users']]
+    ];
 }
