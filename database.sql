@@ -99,9 +99,9 @@ VALUES
     (
         'admin',
         SHA('password'),
-        'super',
-        'admin',
-        'super@admin.cl',
-        '1',
+        null,
+        null,
+        null,
+        null,
         'app'
     );
