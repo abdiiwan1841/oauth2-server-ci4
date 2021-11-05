@@ -3,6 +3,8 @@
 namespace App\Controllers;
 
 use CodeIgniter\RESTful\ResourceController;
+use \OAuth2\Request;
+use \App\Libraries\Oauth;
 
 class Users extends ResourceController
 {
@@ -18,7 +20,13 @@ class Users extends ResourceController
     public function index()
     {
         try {
-            return $this->respond($this->model->findAll());
+            $oauth = new Oauth();
+            $request = new Request();
+            $token = $oauth->server->getAccessTokenData($request->createFromGlobals());
+
+            $response = $this->model->findAll();
+            $response['requested_by'] = $token['user_id'];
+            return $this->respond($response);
         } catch (\Throwable $th) {
             return $this->failServerError($th);
         }
