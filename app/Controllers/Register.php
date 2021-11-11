@@ -20,27 +20,38 @@ class Register extends BaseController
     {
         try {
             $rules = [
-                'username' => 'required|is_unique[oauth_users.username]',
+                'email' => 'required|is_unique[tbl_user.email]',
                 'password' => 'required',
-                'first_name' => 'required',
-                'last_name' => 'required',
-                'email' => 'required',
-                'email_verified' => 'required'
+                'phone' => 'phone',
+                'type' => 'required',
+
             ];
             if (!$this->validate($rules)) {
                 return $this->fail($this->validator->getErrors());
             }
-            $data = [
-                'username' => $this->request->getVar('username'),
-                'password' => sha1($this->request->getVar('password')),
-                'first_name' => $this->request->getVar('first_name'),
-                'last_name' => $this->request->getVar('last_name'),
+            $user = [
                 'email' => $this->request->getVar('email'),
-                'email_verified' => $this->request->getVar('email_verified'),
+                'password' => sha1($this->request->getVar('password')),
+                'phone' => $this->request->getVar('phone'),
+                'type' => $this->request->getVar('type')
+            ];
+            $oauth_user = [
+                'username' => $user['email'],
+                'password' => $user['password'],
                 'scope' => 'app'
             ];
             $model = new UserModel();
-            $response = $model->insert($data);
+            $response = $model->insert($user);
+
+            $builder = $this->db->table('oauth_users');
+            $query = $builder->insert($oauth_user);
+
+            if (!$response) {
+                return $this->failServerError($response);
+            }
+            if (!$query) {
+                return $this->failServerError($query);
+            }
 
             return $this->respondCreated($response);
         } catch (\Throwable $th) {

@@ -4,6 +4,13 @@ CREATE DATABASE oauth2_server;
 
 USE oauth2_server;
 
+CREATE TABLE tbl_user (
+    email VARCHAR(80),
+    phone VARCHAR(80),
+    type VARCHAR(80),
+    PRIMARY KEY (email)
+);
+
 CREATE TABLE oauth_clients (
     client_id VARCHAR(80) NOT NULL,
     client_secret VARCHAR(80),
@@ -89,19 +96,34 @@ INSERT INTO
     `oauth_users` (
         `username`,
         `password`,
-        `first_name`,
-        `last_name`,
-        `email`,
-        `email_verified`,
         `scope`
     )
 VALUES
     (
-        'admin',
+        'admin@admin.cl',
         SHA('password'),
-        null,
-        null,
-        null,
-        null,
         'app'
     );
+
+INSERT INTO
+    `tbl_user` (`email`, `type`)
+VALUES
+    ('admin@admin.cl', 'admin');
+
+INSERT INTO
+    `oauth_users` (
+        `username`,
+        `password`,
+        `scope`
+    )
+VALUES
+    (
+        'user@user.cl',
+        SHA('password'),
+        'app'
+    );
+
+INSERT INTO
+    `tbl_user` (`email`, `type`)
+VALUES
+    ('user@user.cl', 'user');

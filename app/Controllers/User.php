@@ -6,7 +6,7 @@ use CodeIgniter\RESTful\ResourceController;
 use \OAuth2\Request;
 use \App\Libraries\Oauth;
 
-class Users extends ResourceController
+class User extends ResourceController
 {
 
     protected $modelName = 'App\Models\UserModel';
@@ -23,9 +23,7 @@ class Users extends ResourceController
             $oauth = new Oauth();
             $request = new Request();
             $token = $oauth->server->getAccessTokenData($request->createFromGlobals());
-
-            $response = $this->model->findAll();
-            $response['requested_by'] = $token['user_id'];
+            $response = $this->model->find($token['user_id']);
             return $this->respond($response);
         } catch (\Throwable $th) {
             return $this->failServerError($th);

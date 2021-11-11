@@ -34,7 +34,9 @@ $routes->setAutoRoute(true);
 
 $routes->post('login', 'Login::index');
 $routes->post('register', 'Register::index');
-$routes->get('users', 'Users::index');
+
+$routes->get('user', 'User::index');
+$routes->get('admin', 'Admin::index');
 
 
 

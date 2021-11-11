@@ -20,7 +20,8 @@ class Filters extends BaseConfig
         'toolbar'  => DebugToolbar::class,
         'honeypot' => Honeypot::class,
         'oauthFilter' => \App\Filters\OauthFilter::class,
-        'corsFilter' => \App\Filters\CorsFilter::class
+        'corsFilter' => \App\Filters\CorsFilter::class,
+        'adminFilter' => \App\Filters\AdminFilter::class
     ];
 
     /**
@@ -32,12 +33,9 @@ class Filters extends BaseConfig
     public $globals = [
         'before' => [
             'corsFilter'
-            // 'honeypot',
-            // 'csrf',
         ],
         'after' => [
             'toolbar',
-            // 'honeypot',
         ],
     ];
 
@@ -62,6 +60,7 @@ class Filters extends BaseConfig
      * @var array
      */
     public $filters = [
-        'oauthFilter' => ['before' => ['users']]
+        'oauthFilter' => ['before' => ['user', 'admin']],
+        'adminFilter' => ['before' => ['admin']]
     ];
 }

@@ -6,10 +6,9 @@ use CodeIgniter\Model;
 
 class UserModel extends Model
 {
-    protected $table = 'oauth_users';
-    protected $primaryKey = 'username';
+    protected $table = 'tbl_user';
+    protected $primaryKey = 'email';
     protected $allowedFields = [
-        'username', 'password', 'first_name',
-        'last_name', 'email', 'email_verified', 'scope'
+        'email', 'phone', 'type'
     ];
 }
