@@ -7,7 +7,7 @@ USE oauth2_server;
 CREATE TABLE tbl_user_type(
     id INT AUTO_INCREMENT,
     name VARCHAR(80),
-    PRIMARY KEY (id),
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE tbl_user (
@@ -16,7 +16,7 @@ CREATE TABLE tbl_user (
     phone VARCHAR(80),
     type INT,
     PRIMARY KEY (email),
-    FOREIG KEY (type) REFERENCES tbl_user_type (id)
+    FOREIGN KEY (type) REFERENCES tbl_user_type (id)
 );
 
 CREATE TABLE oauth_clients (
@@ -82,6 +82,12 @@ CREATE TABLE oauth_jwt (
 );
 
 INSERT INTO
+    `tbl_user_type` (`name`)
+VALUES
+    ('administrador'),
+    ('basico');
+
+INSERT INTO
     `oauth_clients` (
         `client_id`,
         `client_secret`,
@@ -112,7 +118,7 @@ VALUES
 INSERT INTO
     `tbl_user` (`email`, `type`)
 VALUES
-    ('admin@admin.cl', 'admin');
+    ('admin@admin.cl', 1);
 
 INSERT INTO
     `oauth_users` (
@@ -130,4 +136,4 @@ VALUES
 INSERT INTO
     `tbl_user` (`email`, `type`)
 VALUES
-    ('user@user.cl', 0);
+    ('user@user.cl', 2);

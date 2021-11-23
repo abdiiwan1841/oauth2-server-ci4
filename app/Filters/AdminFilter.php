@@ -20,7 +20,7 @@ class AdminFilter implements FilterInterface
         $token = $oauth->server->getAccessTokenData($request->createFromGlobals());
         $model = new UserModel();
         $user = $model->find($token['user_id']);
-        if ($user['type'] != 'admin') {
+        if ($user['type'] != 1) {
             $response = service('response');
             $response->setStatusCode(401);
             return $response;
