@@ -12,11 +12,15 @@ class Login extends BaseController
 
     public function index()
     {
-        $oauth = new Oauth();
-        $request = new Request();
-        $respond = $oauth->server->handleTokenRequest($request->createFromGlobals());
-        $code = $respond->getStatusCode();
-        $body = $respond->getResponseBody();
-        return $this->respond(json_decode($body), $code);
+        try {
+            $oauth = new Oauth();
+            $request = new Request();
+            $respond = $oauth->server->handleTokenRequest($request->createFromGlobals());
+            $code = $respond->getStatusCode();
+            $body = $respond->getResponseBody();
+            return $this->respond(json_decode($body), $code);
+        } catch (\Throwable $th) {
+            return $this->failServerError($th);
+        }
     }
 }
