@@ -36,9 +36,7 @@ $routes->post('login', 'Login::index');
 
 $routes->post('register', 'Register::index');
 
-$routes->get('user', 'User::index');
-
-$routes->get('admin', 'Admin::index');
+$routes->resource('users');
 
 /*
  * --------------------------------------------------------------------
