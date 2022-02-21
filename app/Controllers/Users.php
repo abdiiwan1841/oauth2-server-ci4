@@ -127,8 +127,7 @@ class Users extends ResourceController
             $oauth = new Oauth();
             $request = new Request();
             $token = $oauth->server->getAccessTokenData($request->createFromGlobals());
-            $id = $this->model->find($token['user_id']);
-            return $this->respond($this->model->where('id', $id)->first());
+            return $this->respond($this->model->where('email', $token['user_id'])->first());
         } catch (\Throwable $th) {
             return $this->failServerError($th);
         }
