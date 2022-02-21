@@ -19,11 +19,11 @@ class Register extends BaseController
     public function index()
     {
         try {
+            helper(['form']);
             $rules = [
-                'email' => 'required|is_unique[tbl_user.email]',
+                'email' => 'required|valid_email|is_unique[tbl_user.email]',
                 'password' => 'required',
-                'phone' => 'phone',
-                'type' => 'required',
+                'phone' => 'permit_empty'
 
             ];
             if (!$this->validate($rules)) {
@@ -32,8 +32,7 @@ class Register extends BaseController
             $user = [
                 'email' => $this->request->getVar('email'),
                 'password' => sha1($this->request->getVar('password')),
-                'phone' => $this->request->getVar('phone'),
-                'type' => $this->request->getVar('type')
+                'phone' => $this->request->getVar('phone')
             ];
             $oauth_user = [
                 'username' => $user['email'],
@@ -42,7 +41,6 @@ class Register extends BaseController
             ];
             $model = new UserModel();
             $response = $model->insert($user);
-
             $builder = $this->db->table('oauth_users');
             $query = $builder->insert($oauth_user);
 
@@ -52,7 +50,6 @@ class Register extends BaseController
             if (!$query) {
                 return $this->failServerError($query);
             }
-
             return $this->respondCreated($response);
         } catch (\Throwable $th) {
             return $this->failServerError($th);

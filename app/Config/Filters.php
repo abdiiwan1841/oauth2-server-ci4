@@ -59,6 +59,6 @@ class Filters extends BaseConfig
      * @var array
      */
     public $filters = [
-        'oauthFilter' => ['before' => ['user']]
+        'oauthFilter' => ['before' => ['users']]
     ];
 }
