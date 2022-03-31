@@ -14,6 +14,8 @@ Copy `database.sql` to your database schema. Add the database configuration and 
 
 ## Endpoints, requests and responses
 
-| Endpoint | Type | Type | Dscription |
-| -; | | -; | | -; | | -; |
-| login/ | POST
+| Endpoing  | Type | Response |
+| --------- | ---- | -------- |
+| login/    | post | ok       |
+| register/ | post | user_id  |
+| me/       | get  | user     |
