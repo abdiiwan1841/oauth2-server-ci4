@@ -14,8 +14,13 @@ Copy `database.sql` to your database schema. Add the database configuration and 
 
 ## Endpoints, requests and responses
 
-| Endpoing  | Type | Response |
-| --------- | ---- | -------- |
-| login/    | post | ok       |
-| register/ | post | user_id  |
-| me/       | get  | user     |
+| Endpoing   | Method | Content type                      | Authorization | Data request                   | Data response |
+| ---------- | ------ | --------------------------------- | ------------- | ------------------------------ | ------------- |
+| login/     | post   | application/x-www-form-urlencoded | basic         | username, password, grant_type | token         |
+| register/  | post   | multipart/form-data               | bearer        | email, password, phone         | user          |
+| me/        | get    | multipart/form-data               | bearer        |                                | user          |
+| users/     | get    | multipart/form-data               | bearer        |                                | users         |
+| users/{id} | get    | multipart/form-data               | bearer        |                                | user          |
+| users/     | post   | multipart/form-data               | bearer        | email, password, phone         | ok/error      |
+| users/{id} | put    | multipart/form-data               | bearer        | email, password, phone         | ok/error      |
+| users/{id} | delete | multipart/form-data               | bearer        |                                | ok/error      |
