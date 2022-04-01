@@ -27,4 +27,4 @@ Copy `database.sql` to your database schema. Add the database configuration and 
 
 ## Basic auth
 
-The basic auth autherization with `client` and `secret` the credentials are in `database.sql`.
+The basic auth authorization with `client` and `secret` the credentials are in `database.sql`.
