@@ -17,7 +17,7 @@ Copy `database.sql` to your database schema. Add the database configuration and 
 | Endpoing   | Method | Content type                      | Authorization | Request                        | Response |
 | ---------- | ------ | --------------------------------- | ------------- | ------------------------------ | -------- |
 | login/     | post   | application/x-www-form-urlencoded | basic         | username, password, grant_type | token    |
-| register/  | post   | multipart/form-data               |               | email, password, phone         | user     |
+| register/  | post   | multipart/form-data               | no auth       | email, password, phone         | user     |
 | me/        | get    | multipart/form-data               | bearer        |                                | user     |
 | users/     | get    | multipart/form-data               | bearer        |                                | users    |
 | users/{id} | get    | multipart/form-data               | bearer        |                                | user     |
